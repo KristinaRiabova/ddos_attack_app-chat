@@ -42,3 +42,7 @@ DDOS Attack Template (ddos.html):
 
 Offers a form for launching a DDOS attack.
 Includes fields for target, port, and duration of the attack.
+
+CASE DIAGRAM(UML)
+<img width="261" alt="image" src="https://github.com/KristinaRiabova/ddos_attack_app-chat/assets/103763577/f3db273d-f5e6-4bc1-acc5-065509f490ea">
+

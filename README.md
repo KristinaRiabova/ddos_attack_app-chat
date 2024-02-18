@@ -1,6 +1,12 @@
 HOW TO USE
+
+
+
 Firstly you need to open http://localhost:8000/ and you will see two users you need to write a secret word (Duck) to recieve a link to the website.Then when you clickk to the link you'll see login page. If you do not have an account, you can register it. It will be implemented in the future. After that you need to write http://localhost:8000/ddos/ and you can launch attack(it will be implemented in the future).
 All links:
+
+
+
 http://localhost:8000/ddos/
 http://localhost:8000/registration/
 http://localhost:8000/login/

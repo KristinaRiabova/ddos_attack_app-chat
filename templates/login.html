@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+ 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        @import url("https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding&family=Oswald:wght@200&display=swap");
+        body {
+            font-family: "Nanum Gothic Coding", monospace;
+            background-color: #222121;
+            padding: 20px;
+            position: relative;
+        }
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+            background-color: #575757;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            text-align: center;
+            color: #34eb9e;
+        }
+        form {
+            margin-top: 20px;
+        }
+        input[type="text"],
+        input[type="password"],
+        button {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: none;
+            border-radius: 5px;
+            box-sizing: border-box;
+            font-family: "Nanum Gothic Coding", monospace;
+        }
+        button {
+            background-color: #34eb9e;
+            color: #fff;
+            cursor: pointer;
+            font-family: "Nanum Gothic Coding", monospace;
+        }
+        button:hover {
+            background-color: #011a0f;
+        }
+        .register-link {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            color: #34eb9e;
+            text-decoration: none;
+        }
+        .register-link:hover {
+            text-decoration: underline;
+        }
+
+        .hacker-icon {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            color: #34eb9e;
+            font-size: 24px;
+        }
+    </style>
+</head>
+<body>
+
+    <i class="fas fa-user-secret hacker-icon"></i>
+
+    <div class="container">
+        <h2>Login</h2>
+        <form method="post">
+            <input type="text" name="username" placeholder="Username">
+            <input type="password" name="password" placeholder="Password">
+            <button type="submit">Login</button>
+        </form>
+        <a href="{% url 'registration' %}" class="register-link">Don't have an account? Register here</a>
+    </div>
+</body>
+</html>

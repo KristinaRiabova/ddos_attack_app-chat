@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ddos attack</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    />
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding&family=Oswald:wght@200&display=swap");
+      body {
+        font-family: "Nanum Gothic Coding", monospace;
+        background-color: #222121;
+        margin: 0;
+        padding: 20px;
+        position: relative;
+      }
+      .container {
+        max-width: 600px;
+        margin: 50px auto;
+        padding: 20px;
+        background-color: #575757;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        position: relative;
+        color: #34eb9e;
+      }
+      h1 {
+        text-align: center;
+        color: #34eb9e;
+      }
+      .data-container {
+        margin-top: 20px;
+      }
+      .data-item {
+        margin-bottom: 10px;
+      }
+      .data-label {
+        font-weight: bold;
+      }
+      input[type="text"] {
+        width: 100%;
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+        margin-top: 10px;
+        font-family: "Nanum Gothic Coding", monospace;
+      }
+
+      .attack-button {
+        display: block;
+        width: 100%;
+        padding: 10px;
+        border: none;
+        border-radius: 5px;
+        background-color: #34eb9e;
+        color: white;
+        font-size: 16px;
+        cursor: pointer;
+        text-align: center;
+        margin-top: 20px;
+        font-family: "Nanum Gothic Coding", monospace;
+        transition: background-color 0.3s ease;
+      }
+      .attack-button:hover {
+        background-color: #016114;
+      }
+      .hacker-icon {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        color: #34eb9e;
+        font-size: 24px;
+      }
+
+      .menu-icon {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        color: #34eb9e;
+        font-size: 24px;
+        cursor: pointer;
+        z-index: 999;
+      }
+      .menu {
+        position: absolute;
+        top: 50px;
+        right: 20px;
+        background-color: #575757;
+        padding: 10px;
+        border-radius: 5px;
+        display: none;
+        z-index: 998;
+      }
+      .menu-item {
+        padding: 5px 0;
+        color: #fff;
+        cursor: pointer;
+      }
+      .menu-item:hover {
+        text-decoration: underline;
+      }
+
+      .logout-item {
+        position: absolute;
+        top: 50px;
+        right: 60px;
+        color: #34eb9e;
+        font-size: 16px;
+        cursor: pointer;
+        z-index: 999;
+      }
+
+      .open-account-item {
+        position: absolute;
+        top: 80px;
+        right: 60px;
+        color: #34eb9e;
+        font-size: 16px;
+        cursor: pointer;
+        z-index: 999;
+      }
+
+      .light-theme {
+        background-color: #ffffff;
+        color: #222121;
+      }
+      .theme-icon {
+        position: absolute;
+        top: 20px;
+        right: 50px;
+        color: #34eb9e;
+        font-size: 24px;
+        cursor: pointer;
+        z-index: 999;
+      }
+      .light-theme h1 {
+        color: #000000;
+      }
+
+      .light-theme .attack-button {
+        background-color: #000000;
+        color: #ffffff;
+      }
+    </style>
+  </head>
+  <body>
+    <i class="fas fa-user-secret hacker-icon"></i>
+
+    <i class="fas fa-bars menu-icon" onclick="toggleMenu()"></i>
+
+    <i class="fas fa-sun theme-icon" onclick="toggleTheme()"></i>
+
+    <div class="container">
+      <h1>Launch Attack</h1>
+      <div class="data-container">
+        <div class="data-item">
+          <label class="data-label" for="target">Target:</label>
+          <input type="text" id="target" name="target" placeholder="Target" />
+        </div>
+        <div class="data-item">
+          <label class="data-label" for="port">Port:</label>
+          <input type="text" id="port" name="port" placeholder="Port" />
+        </div>
+        <div class="data-item">
+          <label class="data-label" for="time">Time:</label>
+          <input type="time" id="time" name="time" />
+        </div>
+      </div>
+      <button class="attack-button" onclick="launchAttack()">
+        Launch Attack
+      </button>
+    </div>
+
+    <div class="menu" id="menu">
+      <div class="menu-item">Log Out</div>
+      <div class="menu-item">Open Account</div>
+    </div>
+
+    <script>
+      function launchAttack() {
+        var target = document.getElementById("target").value;
+        var port = document.getElementById("port").value;
+        var time = document.getElementById("time").value;
+
+        alert(
+          "Attack launched!\nTarget: " +
+            target +
+            "\nPort: " +
+            port +
+            "\nTime: " +
+            time
+        );
+      }
+
+      function toggleMenu() {
+        var menu = document.getElementById("menu");
+        if (menu.style.display === "block") {
+          menu.style.display = "none";
+        } else {
+          menu.style.display = "block";
+        }
+      }
+
+      function toggleTheme() {
+        var body = document.body;
+        var hackerIcon = document.querySelector(".hacker-icon");
+        var menuIcon = document.querySelector(".menu-icon");
+        var themeIcon = document.querySelector(".theme-icon");
+        var container = document.querySelector(".container");
+
+        if (body.classList.contains("dark-theme")) {
+          body.classList.remove("dark-theme");
+          body.classList.add("light-theme");
+          hackerIcon.style.color = "#222121";
+          menuIcon.style.color = "#222121";
+          themeIcon.classList.remove("fa-sun");
+          themeIcon.classList.add("fa-moon");
+          themeIcon.style.color = "#000000";
+          container.style.backgroundColor = "#ffffff";
+          h1.style.color = "#000000";
+          attackButton.style.backgroundColor = "#000000";
+          attackButton.style.color = "#ffffff";
+        } else {
+          body.classList.remove("light-theme");
+          body.classList.add("dark-theme");
+          hackerIcon.style.color = "#34eb9e";
+          menuIcon.style.color = "#34eb9e";
+          themeIcon.classList.remove("fa-moon");
+          themeIcon.classList.add("fa-sun");
+          themeIcon.style.color = "#34eb9e";
+          container.style.backgroundColor = "#575757";
+          h1.style.color = "#34eb9e";
+          attackButton.style.backgroundColor = "#34eb9e";
+          attackButton.style.color = "#ffffff";
+        }
+      }
+    </script>
+  </body>
+</html>

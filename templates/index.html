@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Automatic Messaging</title>
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    />
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding&family=Oswald:wght@200&display=swap");
+
+      body {
+        font-family: "Nanum Gothic Coding", monospace;
+        background-color: #222121;
+        padding: 20px;
+        position: relative;
+      }
+
+      .hacker-icon {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        color: #34eb9e;
+        font-size: 24px;
+      }
+
+      .users {
+        display: flex;
+        justify-content: space-around;
+        margin-top: 100px;
+      }
+
+      #user1,
+      #user2 {
+        width: 40%;
+        height: 300px;
+        border: 1px solid #575757;
+        border-radius: 5px;
+        background-color: #575757;
+        margin-bottom: 20px;
+        overflow-y: auto;
+        padding: 10px;
+        box-sizing: border-box;
+        color: #34eb9e;
+        font-size: 16px;
+      }
+
+      #user1 h2,
+      #user2 h2 {
+        margin-top: 0;
+        color: #34eb9e;
+        text-align: center;
+      }
+
+      .message {
+        padding: 5px;
+        margin-bottom: 5px;
+        background-color: #747474;
+        border-radius: 5px;
+      }
+
+      #message-input {
+        width: 100%;
+        padding: 8px;
+        box-sizing: border-box;
+        margin-top: 10px;
+        font-family: "Nanum Gothic Coding", monospace;
+      }
+
+      #send-button {
+        width: 100%;
+        padding: 8px;
+        box-sizing: border-box;
+        margin-top: 10px;
+        background-color: #34eb9e;
+        color: white;
+        border: none;
+        cursor: pointer;
+        font-family: "Nanum Gothic Coding", monospace;
+        transition: background-color 0.3s ease;
+      }
+
+      #notification-bar {
+        position: fixed;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: #34eb9e;
+        color: white;
+        padding: 10px 20px;
+        border-radius: 5px;
+        display: none;
+        z-index: 999;
+      }
+
+      @media only screen and (max-width: 600px) {
+        body {
+          padding: 10px;
+        }
+
+        .users {
+        display: flex;
+        justify-content: space-around;
+        margin-top: 100px;
+        flex-direction: column;
+        align-items: center;
+        
+        
+      }
+
+      #user1,
+      #user2 {
+        width: 70%;
+        height: 300px;
+        border: 1px solid #575757;
+        border-radius: 5px;
+        background-color: #575757;
+        margin-bottom: 20px;
+        overflow-y: auto;
+        padding: 10px;
+        box-sizing: border-box;
+        color: #34eb9e;
+        font-size: 20px;
+      }
+        #notification-bar {
+          top: 10px;
+        }
+
+      }
+    </style>
+  </head>
+  <body>
+    <i class="fas fa-user-secret hacker-icon"></i>
+
+    <div id="notification-bar"></div>
+
+    <div class="users">
+      <div id="user1">
+        <h2>ADFGHJ</h2>
+        <div id="user1-messages"></div>
+        <input
+          type="text"
+          id="message-input"
+          placeholder="Type your message..."
+        />
+        <button id="send-button">Send</button>
+      </div>
+      <div id="user2">
+        <h2>PLKJHG</h2>
+        <div id="user2-messages"></div>
+      </div>
+    </div>
+
+    <script>
+      const socket = new WebSocket("ws://localhost:8000/ws/chat/");
+      let isUser1Typing = false;
+
+      function sendMessage(message, userId) {
+        socket.send(
+          JSON.stringify({
+            message: message,
+            user_id: userId,
+          })
+        );
+      }
+      function displayUserMessage(userId, message) {
+        const userMessagesDiv = document.getElementById(
+          `user${userId}-messages`
+        );
+        const messageDiv = document.createElement("div");
+        messageDiv.classList.add("message");
+
+        if (userId === 2) {
+          showNotification(message);
+        }
+
+        if (message.includes("Sure! Here's the link")) {
+          const linkElement = document.createElement("a");
+          linkElement.setAttribute("href", "http://localhost:8000/login");
+          linkElement.style.color = "#34eb9e";
+          linkElement.style.textDecoration = "underline";
+          linkElement.textContent = "Sure! Here's the link";
+
+          messageDiv.appendChild(linkElement);
+        } else {
+          messageDiv.textContent = message;
+        }
+
+        userMessagesDiv.appendChild(messageDiv);
+        userMessagesDiv.scrollTop = userMessagesDiv.scrollHeight;
+      }
+
+      function showNotification(message) {
+        const notificationBar = document.getElementById("notification-bar");
+        notificationBar.textContent = `New message: ${message}`;
+        notificationBar.style.display = "block";
+
+        setTimeout(() => {
+          notificationBar.style.display = "none";
+        }, 3000);
+      }
+
+      socket.onmessage = function (event) {
+        const data = JSON.parse(event.data);
+        const userId = data["user_id"];
+        const message = data["message"];
+        displayUserMessage(userId, message);
+
+        if (userId === 1) {
+          handleAutoResponse(message);
+        }
+      };
+
+      socket.onclose = function (event) {
+        document.getElementById("exit-message").style.display = "block";
+      };
+
+      window.onload = function () {
+        sendMessage("Hi there!", 1);
+      };
+
+      function handleAutoResponse(message) {
+        let response = "";
+
+        if (message.toLowerCase().includes("hello")) {
+          response = "Hello! How can I help you?";
+        } else if (message.toLowerCase().includes("how are you")) {
+          response = "I'm fine, thank you!";
+        } else if (message.toLowerCase().includes("duck")) {
+          response = "Sure! Here's the link";
+        } else {
+          response = "Yeap, here's the link";
+        }
+
+        setTimeout(function () {
+          sendMessage(response, 2);
+        }, 1000);
+      }
+
+      document
+        .getElementById("send-button")
+        .addEventListener("click", function () {
+          const messageInput = document.getElementById("message-input");
+          const message = messageInput.value.trim();
+          if (message !== "") {
+            sendMessage(message, 1);
+            messageInput.value = "";
+          }
+        });
+
+      document
+        .getElementById("message-input")
+        .addEventListener("keypress", function (event) {
+          if (event.key === "Enter") {
+            document.getElementById("send-button").click();
+          }
+        });
+    </script>
+  </body>
+</html>

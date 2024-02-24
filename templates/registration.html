@@ -104,52 +104,43 @@
   </head>
   <body>
     <div class="container">
-      <i class="fas fa-user-secret hacker-icon"></i>
-      <h2>Registration</h2>
-      <form method="post">
-        {% csrf_token %}
-        <div class="form-group">
-          <label for="username">Username:</label>
-          <input type="text" id="username" name="username" required />
-        </div>
-        <div class="form-group">
-          <label for="email">Email:</label>
-          <input type="email" id="email" name="email" required />
-        </div>
-        <div class="form-group">
-          <label for="age">Age:</label>
-          <input type="number" id="age" name="age" required min="18" />
-        </div>
-        <div class="form-group">
-          <label for="password">Password:</label>
-          <input type="password" id="password" name="password" required />
-          <span class="error" id="passwordError"></span>
-        </div>
-        <div class="form-group">
-          <button type="submit" id="registerButton">Register</button>
-        </div>
-      </form>
+        <i class="fas fa-user-secret hacker-icon"></i>
+        <h2>Registration</h2>
+        <form id="registerForm" method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required />
+            </div>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required />
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required />
+                <span class="error" id="passwordError"></span>
+            </div>
+            <div class="form-group">
+                <button type="submit" id="registerButton">Register</button>
+            </div>
+        </form>
     </div>
     <script>
-      document
-        .getElementById("registerButton")
-        .addEventListener("click", function (event) {
+        document.getElementById("registerForm").addEventListener("submit", function(event) {
           var passwordInput = document.getElementById("password");
           var password = passwordInput.value;
           if (!/\d/.test(password)) {
-            document.getElementById("passwordError").innerText =
-              "Password must contain at least one digit";
+            document.getElementById("passwordError").innerText = "Password must contain at least one digit";
             event.preventDefault();
           } else if (!/[A-Z]/.test(password)) {
-            document.getElementById("passwordError").innerText =
-              "Password must contain at least one uppercase letter";
+            document.getElementById("passwordError").innerText = "Password must contain at least one uppercase letter";
             event.preventDefault();
           } else if (password.length < 8) {
-            document.getElementById("passwordError").innerText =
-              "Password must be at least 8 characters long";
+            document.getElementById("passwordError").innerText = "Password must be at least 8 characters long";
             event.preventDefault();
           }
         });
-    </script>
+      </script>
   </body>
 </html>

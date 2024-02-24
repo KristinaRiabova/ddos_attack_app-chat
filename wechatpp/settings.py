@@ -25,6 +25,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'chatapp',
+    'rest_framework',
     
 ]
 
@@ -36,6 +37,8 @@ CHANNEL_LAYERS = {
     }
 }
 
+LOGIN_REDIRECT_URL = 'profile_created'  
+LOGIN_URL = 'login'  
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -44,11 +47,12 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware'
 ]
 
 ROOT_URLCONF = 'wechatpp.urls'
 
-LOGIN_REDIRECT_URL = "/"
+LOGIN_REDIRECT_URL = '/profile/update/'
 LOGOUT_REDIRECT_URL = "/accounts/login/"
 
 TEMPLATES = [
@@ -72,13 +76,14 @@ WSGI_APPLICATION = 'wechatpp.wsgi.application'
 
 
 
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'djongo',
+        'NAME': 'Author',
+        
     }
 }
-
 
 
 

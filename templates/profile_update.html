@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <title>Update Profile</title>
  
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <style>
@@ -29,9 +29,10 @@
         form {
             margin-top: 20px;
         }
-        input[type="text"],
-        input[type="password"],
-        button {
+        label {
+            color: #34eb9e;
+        }
+        textarea {
             width: 100%;
             padding: 10px;
             margin-bottom: 10px;
@@ -39,8 +40,14 @@
             border-radius: 5px;
             box-sizing: border-box;
             font-family: "Nanum Gothic Coding", monospace;
+            resize: vertical;
         }
         button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            border: none;
+            border-radius: 5px;
             background-color: #34eb9e;
             color: #fff;
             cursor: pointer;
@@ -48,16 +55,6 @@
         }
         button:hover {
             background-color: #011a0f;
-        }
-        .register-link {
-            display: block;
-            text-align: center;
-            margin-top: 20px;
-            color: #34eb9e;
-            text-decoration: none;
-        }
-        .register-link:hover {
-            text-decoration: underline;
         }
 
         .hacker-icon {
@@ -74,14 +71,13 @@
     <i class="fas fa-user-secret hacker-icon"></i>
 
     <div class="container">
-        <h2>Login</h2>
+        <h2>Update Your Profile</h2>
         <form method="post">
             {% csrf_token %}
-            <input type="text" name="username" placeholder="Username">
-            <input type="password" name="password" placeholder="Password">
-            <button type="submit">Login</button>
+            <label for="bio">Bio:</label><br>
+            <textarea id="bio" name="bio" rows="4" cols="50">{{ bio }}</textarea><br>
+            <button type="submit">Update</button>
         </form>
-        <a href="{% url 'registration' %}" class="register-link">Don't have an account? Register here</a>
     </div>
 </body>
 </html>

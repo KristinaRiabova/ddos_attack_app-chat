@@ -149,51 +149,67 @@
   </head>
   <body>
     <i class="fas fa-user-secret hacker-icon"></i>
-
     <i class="fas fa-bars menu-icon" onclick="toggleMenu()"></i>
-
     <i class="fas fa-sun theme-icon" onclick="toggleTheme()"></i>
-
     <div class="container">
       <h1>Launch Attack</h1>
       <div class="data-container">
         <div class="data-item">
-          <label class="data-label" for="target">Target:</label>
-          <input type="text" id="target" name="target" placeholder="Target" />
+          <label class="data-label" for="target">Target URL:</label>
+          <input
+            type="text"
+            id="target"
+            name="target"
+            placeholder="Target URL"
+          />
         </div>
         <div class="data-item">
-          <label class="data-label" for="port">Port:</label>
-          <input type="text" id="port" name="port" placeholder="Port" />
+          <label class="data-label" for="requests">Number of Requests:</label>
+          <input
+            type="number"
+            id="requests"
+            name="requests"
+            placeholder="Number of Requests"
+            min="1"
+          />
         </div>
-        <div class="data-item">
-          <label class="data-label" for="time">Time:</label>
-          <input type="time" id="time" name="time" />
-        </div>
+        <button class="attack-button" onclick="launchAttack()">
+          Launch Attack
+        </button>
       </div>
-      <button class="attack-button" onclick="launchAttack()">
-        Launch Attack
-      </button>
     </div>
-
     <div class="menu" id="menu">
-      <div class="menu-item">Log Out</div>
-      <div class="menu-item">Open Account</div>
+      <div class="menu-item"><a href="{% url 'profile_created' %}">Open Account</a></div>
     </div>
-
     <script>
       function launchAttack() {
         var target = document.getElementById("target").value;
-        var port = document.getElementById("port").value;
-        var time = document.getElementById("time").value;
+        var numRequests = document.getElementById("requests").value;
 
-        alert(
-          "Attack launched!\nTarget: " +
-            target +
-            "\nPort: " +
-            port +
-            "\nTime: " +
-            time
-        );
+        
+        fetch("/launch_attack/", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded", 
+            "X-CSRFToken": getCookie("csrftoken"),
+          },
+          body:
+            "target=" +
+            encodeURIComponent(target) +
+            "&requests=" +
+            encodeURIComponent(numRequests), 
+        })
+          .then((response) => {
+            if (response.ok) {
+              alert("Attack launched successfully!");
+            } else {
+              alert("Error launching attack.");
+            }
+          })
+          .catch((error) => {
+            console.error("Error:", error);
+            alert("Error launching attack.");
+          });
       }
 
       function toggleMenu() {
@@ -221,9 +237,6 @@
           themeIcon.classList.add("fa-moon");
           themeIcon.style.color = "#000000";
           container.style.backgroundColor = "#ffffff";
-          h1.style.color = "#000000";
-          attackButton.style.backgroundColor = "#000000";
-          attackButton.style.color = "#ffffff";
         } else {
           body.classList.remove("light-theme");
           body.classList.add("dark-theme");
@@ -233,10 +246,25 @@
           themeIcon.classList.add("fa-sun");
           themeIcon.style.color = "#34eb9e";
           container.style.backgroundColor = "#575757";
-          h1.style.color = "#34eb9e";
-          attackButton.style.backgroundColor = "#34eb9e";
-          attackButton.style.color = "#ffffff";
         }
+      }
+
+     
+      function getCookie(name) {
+        var cookieValue = null;
+        if (document.cookie && document.cookie !== "") {
+          var cookies = document.cookie.split(";");
+          for (var i = 0; i < cookies.length; i++) {
+            var cookie = cookies[i].trim();
+            if (cookie.substring(0, name.length + 1) === name + "=") {
+              cookieValue = decodeURIComponent(
+                cookie.substring(name.length + 1)
+              );
+              break;
+            }
+          }
+        }
+        return cookieValue;
       }
     </script>
   </body>

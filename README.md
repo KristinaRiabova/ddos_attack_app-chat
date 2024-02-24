@@ -75,40 +75,55 @@ Represents additional profile information associated with each user, such as a b
 ## Registration Endpoint:
 
 URL: /registration/
+
 Method: POST
+
 Parameters: username, email, password
+
 Functionality: Creates a new user profile and saves it to the database.
 
 ## Login Endpoint:
 
 URL: /login/
+
 Method: POST
+
 Parameters: username, password
+
 Functionality: Authenticates the user and logs them into the system.
 
 ## Profile Creation Endpoint(after registration):
 
 URL: /profile_created/
+
 Method: GET
+
 Functionality: Retrieves the user profile information after successful login.
 
 ## Profile Update Endpoint(update your bio):
 
 URL: /update_profile/
+
 Method: POST
+
 Parameters: bio
+
 Functionality: Updates the bio information of the user's profile.
 
 ## Profile Deletion Endpoint:
 
 URL: /delete_profile/
+
 Method: POST
+
 Functionality: Deletes the user's profile from the system.
 
 ## DDoS Endpoint:
 
 URL: /ddos/
+
 Method: GET
+
 Functionality: Renders a page for launching DDoS attacks (for testing purposes).
 
 ## Error Handling:

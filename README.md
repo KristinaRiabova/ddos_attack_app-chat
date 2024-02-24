@@ -1,8 +1,8 @@
-## HOW TO USE
+# HOW TO USE MY APP
 
 
 
-# Firstly you need to open http://localhost:8000/ and you will see two users you need to write a secret word (Duck) to recieve a link to the website.Then when you clickk to the link you'll see registration page. After that u will have your own profile and than u will see three links (update profile, delete profile and launch ddos attack)
+## Firstly you need to open http://localhost:8000/ and you will see two users you need to write a secret word (Duck) to recieve a link to the website.Then when you clickk to the link you'll see registration page. After that u will have your own profile and than u will see three links (update profile, delete profile and launch ddos attack)
 
 
 ## All links:
@@ -24,7 +24,7 @@ http://localhost:8000/profile/update/
 http://localhost:8000/profile/delete/
 
 
-# This guide aims to help future developers understand the implemented features in the provided code.
+## This guide aims to help future developers understand the implemented features in the provided code.
 
 WebSocket Integration:
 Enables real-time communication between clients and the server.
@@ -59,7 +59,7 @@ Flexibility: MongoDB is a NoSQL database, offering a flexible schema design that
 
 Ease of Use: MongoDB's query language is intuitive and easy to understand, simplifying database operations and development tasks.
 
-# Entity Models:
+## Entity Models:
 
 UserProfile Model:
 
@@ -70,48 +70,48 @@ Profile Model:
 Represents additional profile information associated with each user, such as a bio field.
 
 
-## API Endpoints:
+# API Endpoints:
 
-# Registration Endpoint:
+## Registration Endpoint:
 
 URL: /registration/
 Method: POST
 Parameters: username, email, password
 Functionality: Creates a new user profile and saves it to the database.
 
-# Login Endpoint:
+## Login Endpoint:
 
 URL: /login/
 Method: POST
 Parameters: username, password
 Functionality: Authenticates the user and logs them into the system.
 
-# Profile Creation Endpoint(after registration):
+## Profile Creation Endpoint(after registration):
 
 URL: /profile_created/
 Method: GET
 Functionality: Retrieves the user profile information after successful login.
 
-# Profile Update Endpoint(update your bio):
+## Profile Update Endpoint(update your bio):
 
 URL: /update_profile/
 Method: POST
 Parameters: bio
 Functionality: Updates the bio information of the user's profile.
 
-# Profile Deletion Endpoint:
+## Profile Deletion Endpoint:
 
 URL: /delete_profile/
 Method: POST
 Functionality: Deletes the user's profile from the system.
 
-# DDoS Endpoint:
+## DDoS Endpoint:
 
 URL: /ddos/
 Method: GET
 Functionality: Renders a page for launching DDoS attacks (for testing purposes).
 
-# Error Handling:
+## Error Handling:
 
 The code implements error handling mechanisms to gracefully manage unexpected situations and prevent application crashes.
 Error handling techniques such as try-except blocks, conditional checks, and status code validations are employed.

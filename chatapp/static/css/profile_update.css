@@ -1,0 +1,89 @@
+
+@import url("https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding&family=Oswald:wght@200&display=swap");
+body {
+    font-family: "Nanum Gothic Coding", monospace;
+    background-color: #222121;
+    padding: 20px;
+    position: relative;
+}
+.container {
+    max-width: 400px;
+    margin: 0 auto;
+    background-color: #575757;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+h2 {
+    text-align: center;
+    color: #34eb9e;
+}
+form {
+    margin-top: 20px;
+
+}
+label {
+    color: #34eb9e;
+}
+textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: none;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-family: "Nanum Gothic Coding", monospace;
+    resize: vertical;
+    margin-top: 10px;
+}
+button {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #34eb9e;
+    color: #fff;
+    cursor: pointer;
+    font-family: "Nanum Gothic Coding", monospace;
+}
+button:hover {
+    background-color: #011a0f;
+}
+
+.hacker-icon {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    color: #34eb9e;
+    font-size: 24px;
+}
+
+.back-button {
+    display: block;
+    text-align: center;
+    margin-top: 20px;
+}
+
+@media only screen and (max-width: 600px) {
+    .container {
+        max-width: 300px;
+        margin: 0 auto;
+        background-color: #575757;
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        margin-top: 80px;
+    }
+    textarea {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 10px;
+        border: none;
+        border-radius: 5px;
+        box-sizing: border-box;
+        font-family: "Nanum Gothic Coding", monospace;
+        resize: vertical;
+        margin-top: 10px;
+    }
+}

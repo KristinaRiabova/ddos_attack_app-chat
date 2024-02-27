@@ -1,0 +1,136 @@
+@import url("https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding&family=Oswald:wght@200&display=swap");
+body {
+  font-family: "Nanum Gothic Coding", monospace;
+  background-color: #222121;
+  margin: 0;
+  padding: 20px;
+  position: relative;
+}
+.container {
+  max-width: 600px;
+  margin: 50px auto;
+  padding: 20px;
+  background-color: #575757;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  position: relative;
+  color: #34eb9e;
+}
+h1 {
+  text-align: center;
+  color: #34eb9e;
+}
+.data-container {
+  margin-top: 20px;
+}
+.data-item {
+  margin-bottom: 10px;
+}
+.data-label {
+  font-weight: bold;
+}
+input[type="text"] {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  margin-top: 10px;
+  font-family: "Nanum Gothic Coding", monospace;
+}
+
+.attack-button {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: #34eb9e;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  text-align: center;
+  margin-top: 20px;
+  font-family: "Nanum Gothic Coding", monospace;
+  transition: background-color 0.3s ease;
+}
+.attack-button:hover {
+  background-color: #016114;
+}
+.hacker-icon {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  color: #34eb9e;
+  font-size: 24px;
+}
+
+.menu-icon {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  color: #34eb9e;
+  font-size: 24px;
+  cursor: pointer;
+  z-index: 999;
+}
+.menu {
+  position: absolute;
+  top: 50px;
+  right: 20px;
+  background-color: #575757;
+  padding: 10px;
+  border-radius: 5px;
+  display: none;
+  z-index: 998;
+}
+.menu-item {
+  padding: 5px 0;
+  color: #fff;
+  cursor: pointer;
+}
+.menu-item:hover {
+  text-decoration: underline;
+}
+
+.logout-item {
+  position: absolute;
+  top: 50px;
+  right: 60px;
+  color: #34eb9e;
+  font-size: 16px;
+  cursor: pointer;
+  z-index: 999;
+}
+
+.open-account-item {
+  position: absolute;
+  top: 80px;
+  right: 60px;
+  color: #34eb9e;
+  font-size: 16px;
+  cursor: pointer;
+  z-index: 999;
+}
+
+.light-theme {
+  background-color: #ffffff;
+  color: #222121;
+}
+.theme-icon {
+  position: absolute;
+  top: 20px;
+  right: 50px;
+  color: #34eb9e;
+  font-size: 24px;
+  cursor: pointer;
+  z-index: 999;
+}
+.light-theme h1 {
+  color: #000000;
+}
+
+.light-theme .attack-button {
+  background-color: #000000;
+  color: #ffffff;
+}

@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -8,99 +9,8 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
     />
-    <style>
-      @import url("https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding&family=Oswald:wght@200&display=swap");
-      body {
-        font-family: "Nanum Gothic Coding", monospace;
-        background-color: #222121;
-        margin: 0;
-        padding: 0;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-      }
-      .container {
-        width: 100%;
-        max-width: 400px;
-        background-color: #575757;
-        padding: 40px;
-        border-radius: 8px;
-        box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
-      }
-      h2 {
-        text-align: center;
-        color: #34eb9e;
-        margin-bottom: 30px;
-      }
-      .form-group {
-        margin-bottom: 20px;
-      }
-      label {
-        font-weight: bold;
-        display: block;
-        margin-bottom: 5px;
-        color: #34eb9e;
-      }
-      input[type="text"],
-      input[type="password"],
-      input[type="email"],
-      input[type="number"] {
-        width: 378px;
-        padding: 10px;
-        border: 1px solid #cccccc;
-        border-radius: 5px;
-        font-size: 16px;
-      }
-      button[type="submit"] {
-        background-color: #34eb9e;
-        color: #ffffff;
-        border: none;
-        padding: 10px 20px;
-        border-radius: 5px;
-        cursor: pointer;
-        font-size: 16px;
-        width: 100%;
-        transition: background-color 0.3s ease;
-        margin-top: 20px;
-        transition: background-color 0.3s ease;
-      }
-      button[type="submit"]:hover {
-        background-color: #016114;
-      }
-      .error {
-        color: #ff0000;
-        font-size: 14px;
-        margin-top: 5px;
-      }
-      .hacker-icon {
-        color: #34eb9e;
-      }
+    <link rel="stylesheet" href="{% static 'css/registration.css' %}" />
 
-      @media only screen and (max-width: 600px) {
-        body {
-          padding: 10px;
-        }
-        .container {
-          width: 100%;
-          max-width: 300px;
-          background-color: #575757;
-          padding: 40px;
-          border-radius: 8px;
-          box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
-        }
-        input[type="text"],
-        input[type="password"],
-        input[type="email"],
-        input[type="number"] {
-          width: 278px;
-          padding: 10px;
-          border: 1px solid #cccccc;
-          border-radius: 5px;
-          font-size: 30px;
-        }
-      }
-    </style>
   </head>
   <body>
     <div class="container">
@@ -126,21 +36,6 @@
             </div>
         </form>
     </div>
-    <script>
-        document.getElementById("registerForm").addEventListener("submit", function(event) {
-          var passwordInput = document.getElementById("password");
-          var password = passwordInput.value;
-          if (!/\d/.test(password)) {
-            document.getElementById("passwordError").innerText = "Password must contain at least one digit";
-            event.preventDefault();
-          } else if (!/[A-Z]/.test(password)) {
-            document.getElementById("passwordError").innerText = "Password must contain at least one uppercase letter";
-            event.preventDefault();
-          } else if (password.length < 8) {
-            document.getElementById("passwordError").innerText = "Password must be at least 8 characters long";
-            event.preventDefault();
-          }
-        });
-      </script>
+    <script src="{% static 'js/registration.js' %}"></script>
   </body>
 </html>

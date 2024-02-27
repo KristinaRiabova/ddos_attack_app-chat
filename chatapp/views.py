@@ -12,6 +12,7 @@ from django.views.decorators.csrf import csrf_exempt
 import requests
 import threading
 from django.http import JsonResponse
+from .forms import ProfileUpdateForm
 
 import logging
 logger = logging.getLogger(__name__)
@@ -111,19 +112,14 @@ def read_profile(request):
 @login_required
 def update_profile(request):
     if request.method == 'POST':
-        new_bio = request.POST.get('bio')
-
-
-        if not new_bio:
-            return HttpResponseBadRequest('Bio field is required')
-
-        profile = request.user.profile
-        profile.bio = new_bio
-        profile.save()
-        return redirect('read_profile')
+        form = ProfileUpdateForm(request.POST, request.FILES, instance=request.user.profile)
+        if form.is_valid():
+            form.save()
+            return redirect('read_profile')
     else:
-        return render(request, 'profile_update.html')
-    
+        form = ProfileUpdateForm(instance=request.user.profile)
+    return render(request, 'profile_update.html', {'form': form})
+
 @login_required
 def delete_profile(request):
     if request.method == 'POST':
@@ -187,3 +183,6 @@ def launch_attack(request):
     else:
         logger.error("Only POST requests are allowed.")
         return JsonResponse({'error': 'Only POST requests are allowed.'}, status=405)
+    
+
+

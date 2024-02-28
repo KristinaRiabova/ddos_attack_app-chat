@@ -15,12 +15,15 @@
 
     <div class="container">
         <h2>Login</h2>
-        <form method="post">
+        <form method="post" action="{% url 'login_view' %}">
             {% csrf_token %}
             <input type="text" name="username" placeholder="Username">
             <input type="password" name="password" placeholder="Password">
             <button type="submit">Login</button>
         </form>
+        {% if error_message %}
+            <p>{{ error_message }}</p>
+        {% endif %}
         <a href="{% url 'registration' %}" class="register-link">Don't have an account? Register here</a>
     </div>
 </body>

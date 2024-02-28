@@ -15,6 +15,8 @@ from django.http import JsonResponse
 from .forms import ProfileUpdateForm
 from django.core.cache import cache
 from django.contrib.auth import authenticate, login as django_login
+from django.contrib import messages
+import logging
 
 logging.basicConfig(level=logging.DEBUG)
 logger = logging.getLogger(__name__)
@@ -26,25 +28,30 @@ def index(request):
 
 
 def login_view(request):
-    logger.info("Login view accessed.")
+    error_message = None
+
     if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
 
+        client = MongoClient('mongodb+srv://kriabova:Kris0192@authorization.iobm8pl.mongodb.net/?retryWrites=true&w=majority&appName=Authorization')
+        db = client['Authoriz']
+        collection = db['user']
 
-        user = authenticate(username=username, password=password)
-        if user is not None:
+        user_document = collection.find_one({'username': username, 'password': password})
 
-            django_login(request, user)
-            logger.info(f"User {username} logged in.")
-            return redirect('profile_created')
+        if user_document:
+            user = authenticate(username=username, password=password)
+            if user is not None:
+                login(request, user)
+                logger.info(f"User {username} logged in.")
+                return redirect('profile_created') 
+            else:
+                error_message = 'User authentication failed'
         else:
+            error_message = 'User does not exist'
 
-            logger.error("Invalid username or password.")
-            return render(request, 'login.html', {'error_message': 'Invalid username or password'})
-    else:
-        return render(request, 'login.html')
-
+    return render(request, 'login.html', {'error_message': error_message})
 
 def registration_view(request):
     logger.info("Registration view accessed.")
@@ -120,10 +127,16 @@ def update_profile(request):
 @login_required
 def delete_profile(request):
     logger.info("Delete profile view accessed.")
-    if request.method == 'POST':
+    try:
         profile = request.user.profile
+    except Profile.DoesNotExist:
+        messages.error(request, "Profile not found.")
+        return redirect('profile_view')
+
+    if request.method == 'POST':
         profile.delete()
-        return redirect('registration')
+        messages.success(request, "Profile deleted successfully.")
+        return redirect('registration')  
     else:
         return render(request, 'profile_delete.html')
 

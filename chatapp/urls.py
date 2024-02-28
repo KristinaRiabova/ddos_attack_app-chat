@@ -3,13 +3,13 @@ from . import views
 from django.contrib.auth import views as auth_views
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
-
+from .views import login_view
 from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
     path('', views.index, name='index'),
-    path('login/', auth_views.LoginView.as_view(template_name='login.html'), name='login'),
+   path('login/', login_view, name='login_view'),
     path('registration/', views.registration_view, name='registration'),
     path('ddos/', views.ddos, name='ddos'),
     path('profile_created/', views.profile_created_view, name='profile_created'),

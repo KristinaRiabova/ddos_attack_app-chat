@@ -17,10 +17,11 @@
 
     <div class="profile-container">
       <h1>Welcome, {{ username }}!</h1>
-      <p>Your email: {{ email }}</p>
-      <p>Your bio: {{ bio }}</p>
       <p>Profile picture:</p>
       <img src="{{ user.profile.profile_picture.url }}" alt="Profile Picture"  />
+      <p>Your email: {{ email }}</p>
+      <p>Your bio: {{ bio }}</p>
+      
       <div class="menu" id="profile-menu">
         <a href="{% url 'update_profile' %}">Update Profile</a>
         <a href="{% url 'delete_profile' %}">Delete Profile</a>

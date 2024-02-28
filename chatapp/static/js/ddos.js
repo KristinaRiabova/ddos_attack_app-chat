@@ -1,9 +1,10 @@
-
 function launchAttack() {
   var target = document.getElementById("target").value;
   var numRequests = document.getElementById("requests").value;
 
-  
+
+  console.log("Launching attack with target:", target, "and number of requests:", numRequests);
+
   fetch("/launch_attack/", {
     method: "POST",
     headers: {
@@ -29,14 +30,18 @@ function launchAttack() {
     });
 }
 
+
 function toggleMenu() {
   var menu = document.getElementById("menu");
   if (menu.style.display === "block") {
     menu.style.display = "none";
+    console.log("Menu is hidden");
   } else {
     menu.style.display = "block";
+    console.log("Menu is displayed");
   }
 }
+
 
 function toggleTheme() {
   var body = document.body;
@@ -54,6 +59,7 @@ function toggleTheme() {
     themeIcon.classList.add("fa-moon");
     themeIcon.style.color = "#000000";
     container.style.backgroundColor = "#ffffff";
+    console.log("Switched to light theme");
   } else {
     body.classList.remove("light-theme");
     body.classList.add("dark-theme");
@@ -63,6 +69,7 @@ function toggleTheme() {
     themeIcon.classList.add("fa-sun");
     themeIcon.style.color = "#34eb9e";
     container.style.backgroundColor = "#575757";
+    console.log("Switched to dark theme");
   }
 }
 

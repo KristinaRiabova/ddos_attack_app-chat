@@ -95,6 +95,14 @@ p {
   cursor: pointer;
 }
 img {
-  width: 100px;
-  height: 100px;
+  width: 90px;
+  height: 90px;
+  border: 2px solid #34eb9e;
+  border-radius: 50%;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+  transition: transform 0.3s ease; 
+}
+
+img:hover {
+  transform: scale(1.1); 
 }

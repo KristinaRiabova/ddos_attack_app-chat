@@ -104,6 +104,7 @@ JavaScript WebSocket client establishes a connection with the server. Functions 
 # Database Integration Documentation
 
 For this project, MongoDB was chosen as the database solution due to several reasons:
+
 Flexibility: MongoDB is a NoSQL database, offering a flexible schema design that allows for easy adaptation to changing data requirements.
 
 Ease of Use: MongoDB's query language is intuitive and easy to understand, simplifying database operations and development tasks.
@@ -112,9 +113,11 @@ Ease of Use: MongoDB's query language is intuitive and easy to understand, simpl
 ## Entity Models:
 
 UserProfile Model:
+
 Stores user information such as username, email, and password.
 
 Profile Model:
+
 Represents additional profile information associated with each user, such as a bio field.
 
 
@@ -123,48 +126,63 @@ Represents additional profile information associated with each user, such as a b
 ## Registration Endpoint:
 
 URL: /registration/
+
 Method: POST
+
 Parameters: username, email, password
+
 Functionality: Creates a new user profile and saves it to the database.
 
 ## Login Endpoint:
 
 URL: /login/
+
 Method: POST
+
 Parameters: username, password
+
 Functionality: Authenticates the user and logs them into the system.
 
 ## Profile Creation Endpoint(after registration):
 
 URL: /profile_created/
+
 Method: GET
+
 Functionality: Retrieves the user profile information after successful login.
 
 ## Profile Update Endpoint(update your bio):
 
 URL: /update_profile/
+
 Method: POST
+
 Parameters: bio,profile picture
+
 Functionality: Updates the bio information of the user's profile and picture of the profile.
 
 ## Profile Deletion Endpoint:
 
 URL: /delete_profile/
+
 Method: POST
+
 Functionality: Deletes the user's profile from the system.
 
-##DDoS Endpoint:
+## DDoS Endpoint:
 
 URL: /ddos/
+
 Method: GET
+
 Functionality: Renders a page for launching DDoS attacks (for testing purposes).
 
 
-CASE DIAGRAM(UML)
+
 
 # Experience the world of DDoS attacks responsibly with DDOS ATTACKER!
 
-
+CASE DIAGRAM(UML)
 
 
 

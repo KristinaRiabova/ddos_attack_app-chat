@@ -18,7 +18,9 @@ from django.contrib.auth import authenticate, login as django_login
 from django.contrib import messages
 import logging
 from django.http import HttpResponseNotFound
-from django.views.decorators.cache import cache_page
+
+from django.contrib.auth import logout as django_logout
+
 
 
 logging.basicConfig(level=logging.DEBUG)
@@ -29,13 +31,13 @@ def index(request):
     return render(request, 'index.html')
 
 
-
 def login_view(request):
     error_message = None
 
     if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
+
 
         client = MongoClient('mongodb+srv://kriabova:Kris0192@authorization.iobm8pl.mongodb.net/?retryWrites=true&w=majority&appName=Authorization')
         db = client['Authoriz']
@@ -47,11 +49,11 @@ def login_view(request):
             user = authenticate(username=username, password=password)
             if user is not None:
                 login(request, user)
-
-                
-                request.session['user_id'] = user.id
-
                 logger.info(f"User {username} logged in.")
+
+              
+                request.session['user_authenticated'] = True
+
                 return redirect('profile_created') 
             else:
                 error_message = 'User authentication failed'
@@ -59,6 +61,7 @@ def login_view(request):
             error_message = 'User does not exist'
 
     return render(request, 'login.html', {'error_message': error_message})
+
 
 
 
@@ -97,27 +100,17 @@ def registration_view(request):
 
 
 @login_required
-@cache_page(60 * 15) 
 def profile_created_view(request):
     logger.info("Profile created view accessed.")
-    user_id = request.session.get('user_id')
-    user = get_object_or_404(User, pk=user_id)
+    profile = request.user.profile
     
-
-    client = MongoClient('mongodb+srv://kriabova:Kris0192@authorization.iobm8pl.mongodb.net/?retryWrites=true&w=majority&appName=Authorization')
-    db = client['Authoriz']
-    collection = db['user']
-    profile_data = collection.find_one({'user_id': user_id})
-
-
-    if profile_data is None:
-        return HttpResponseNotFound("Profile not found")  
     context = {
-        'username': user.username,
-        'email': user.email,
- 
+
+        'username': request.user.username,
+        'email': request.user.email,
     }
     return render(request, 'profile_created.html', context)
+
 
 @login_required
 def read_profile(request):
@@ -141,10 +134,12 @@ def update_profile(request):
         form = ProfileUpdateForm(request.POST, request.FILES, instance=request.user.profile)
         if form.is_valid():
             form.save()
+
             return redirect('read_profile')
     else:
         form = ProfileUpdateForm(instance=request.user.profile)
     return render(request, 'profile_update.html', {'form': form})
+
 
 @login_required
 def delete_profile(request):
@@ -156,10 +151,10 @@ def delete_profile(request):
         return redirect('profile_view')
 
     if request.method == 'POST':
-        
         profile.delete()
-        
-       
+
+        cache.delete(f"profile_{request.user.username}")
+
         client = MongoClient('mongodb+srv://kriabova:Kris0192@authorization.iobm8pl.mongodb.net/?retryWrites=true&w=majority&appName=Authorization')
         db = client['Authoriz']
         collection = db['user']
@@ -169,7 +164,6 @@ def delete_profile(request):
         return redirect('registration')  
     else:
         return render(request, 'profile_delete.html')
-
 
 @login_required
 def ddos(request):
@@ -229,3 +223,11 @@ def launch_attack(request):
     else:
         logger.error("Only POST requests are allowed.")
         return JsonResponse({'error': 'Only POST requests are allowed.'}, status=405)
+    
+
+def logout(request):
+
+    django_logout(request)
+
+
+    return redirect('login_view')

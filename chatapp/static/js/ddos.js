@@ -21,7 +21,7 @@ function launchAttack() {
       if (response.ok) {
         alert("Attack launched successfully!");
       } else {
-        alert("Error launching attack.");
+        alert("OOOOPS SOMETHING WENT WRONG... (website crashed)");
       }
     })
     .catch((error) => {

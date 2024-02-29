@@ -90,3 +90,18 @@ button[type="submit"]:hover {
     font-size: 30px;
   }
 }
+.login-link {
+  text-align: center;
+  margin-top: 20px;
+  color: #34eb9e; 
+  
+}
+
+.login-link a {
+  color: #34eb9e; 
+  text-decoration: none; 
+}
+
+.login-link a:hover {
+  text-decoration: underline; 
+}

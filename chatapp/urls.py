@@ -6,6 +6,8 @@ from rest_framework.routers import DefaultRouter
 from .views import login_view
 from django.conf import settings
 from django.conf.urls.static import static
+from .views import logout
+
 
 urlpatterns = [
     path('', views.index, name='index'),
@@ -17,6 +19,7 @@ urlpatterns = [
     path('profile/update/', views.update_profile, name='update_profile'),
     path('profile/delete/', views.delete_profile, name='delete_profile'),
     path('launch_attack/', views.launch_attack, name='launch_attack'),
+    path('logout/', logout, name='logout'),
 ]
 
 if settings.DEBUG:

@@ -1,36 +1,42 @@
-import logging
 from django.contrib.auth.models import User
-from django.contrib.auth import authenticate, login
-from pymongo import MongoClient
-from .models import Profile
-from django.contrib.auth.decorators import login_required
-from django.contrib.auth.hashers import check_password
-from django.http import HttpResponseBadRequest
+from django.contrib.auth import authenticate, login, logout as django_logout
+from django.http import HttpResponseBadRequest, HttpResponseNotFound, JsonResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import Http404
 from django.views.decorators.csrf import csrf_exempt
+from .models import Profile
+from .forms import ProfileUpdateForm
+from django.contrib.auth.decorators import login_required
+from django.contrib import messages
+from django.core.cache import cache
+from pymongo import MongoClient
 import requests
 import threading
-from django.http import JsonResponse
-from .forms import ProfileUpdateForm
-from django.core.cache import cache
-from django.contrib.auth import authenticate, login as django_login
-from django.contrib import messages
 import logging
-from django.http import HttpResponseNotFound
-
-from django.contrib.auth import logout as django_logout
+import sys
 
 
 
+#LOGGING
 logging.basicConfig(level=logging.DEBUG)
 logger = logging.getLogger(__name__)
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.DEBUG)
+formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+console_handler = logging.StreamHandler(sys.stdout)
+console_handler.setLevel(logging.DEBUG)
+console_handler.setFormatter(formatter)
+logger.addHandler(console_handler)
+
+
 
 def index(request):
     logger.info("Index page accessed.")
     return render(request, 'index.html')
 
 
+
+#authentication
 def login_view(request):
     error_message = None
 
@@ -64,7 +70,6 @@ def login_view(request):
 
 
 
-
 def registration_view(request):
     logger.info("Registration view accessed.")
     if request.method == 'POST':
@@ -76,7 +81,10 @@ def registration_view(request):
         db = client['Authoriz']
         collection = db['user']
 
-        if collection.find_one({'username': username}) is None and collection.find_one({'email': email}) is None:
+        existing_user = collection.find_one({'$or': [{'username': username}, {'email': email}]})
+        if existing_user:
+            return render(request, 'registration.html', {'error_message': 'Username or email already exists'})
+        else:
             user_data = {
                 'username': username,
                 'email': email,
@@ -87,18 +95,22 @@ def registration_view(request):
             user = User.objects.create_user(username=username, email=email, password=password)
             profile = Profile(user=user)
             profile.save()
-
             user = authenticate(username=username, password=password)
             if user is not None:
                 login(request, user)
                 logger.info(f"User {username} registered and logged in.")
                 return redirect('profile_created')
-        else:
-            return render(request, 'registration.html', {'error_message': 'Username or email already exists'})
     else:
         return render(request, 'registration.html')
 
 
+def logout(request):
+    django_logout(request)
+    return redirect('login_view')
+
+
+
+#profile
 @login_required
 def profile_created_view(request):
     logger.info("Profile created view accessed.")
@@ -127,6 +139,7 @@ def read_profile(request):
         logger.error("Profile does not exist.")
         raise Http404("Profile does not exist")
 
+
 @login_required
 def update_profile(request):
     logger.info("Update profile view accessed.")
@@ -148,7 +161,6 @@ def delete_profile(request):
         profile = request.user.profile
     except Profile.DoesNotExist:
         messages.error(request, "Profile not found.")
-        return redirect('profile_view')
 
     if request.method == 'POST':
         profile.delete()
@@ -165,6 +177,9 @@ def delete_profile(request):
     else:
         return render(request, 'profile_delete.html')
 
+
+
+#ddos
 @login_required
 def ddos(request):
     logger.info("DDoS view accessed.")
@@ -224,10 +239,3 @@ def launch_attack(request):
         logger.error("Only POST requests are allowed.")
         return JsonResponse({'error': 'Only POST requests are allowed.'}, status=405)
     
-
-def logout(request):
-
-    django_logout(request)
-
-
-    return redirect('login_view')

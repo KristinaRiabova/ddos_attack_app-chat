@@ -61,7 +61,28 @@ Welcome to DDOS ATTACKER!
 #                      Documentation                        #
 ############################################################
 
+#1. Logging
 
+The project utilizes the Python logging module for logging events and errors. It's configured to output log messages with a level of DEBUG. Log messages are generated throughout the code to track events such as page accesses, user logins, and errors.
+
+#2. User Authentication and Registration
+
+Login View (login_view): Handles user login by authenticating against MongoDB and Django's authentication system.
+Registration View (registration_view): Allows users to register by creating a new user profile in MongoDB and Django.
+
+#3. Profile Management
+Profile Creation View (profile_created_view): Displays the user's profile information after successful login.
+Profile Update View (update_profile): Allows users to update their profile information, including the bio and profile picture.
+Profile Deletion View (delete_profile): Enables users to delete their profiles from the system.
+
+#4. DDoS Attack Simulation
+DDoS View (ddos): Renders a page for launching DDoS attacks. It utilizes threading to send multiple HTTP requests to the specified target URL simultaneously.
+
+#5. Error Handling
+The code includes error handling mechanisms to gracefully manage unexpected situations and prevent application crashes. Error messages and status codes are returned to the client to communicate the nature of encountered errors.
+
+#6. Caching
+Cache Usage: The project employs Django's caching mechanism (django.core.cache) to cache responses from external HTTP requests. Cached responses are stored for a specified duration to optimize performance and reduce the load on external services.
 
 
 

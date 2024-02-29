@@ -1,63 +1,114 @@
-# HOW TO USE MY APP
+![banner](https://zn.ua/img/article/4846/30_main.jpeg)
 
 
 
-## Firstly you need to open http://localhost:8000/ and you will see two users you need to write a secret word (Duck) to recieve a link to the website.Then when you clickk to the link you'll see registration page. After that u will have your own profile and than u will see three links (update profile, delete profile and launch ddos attack)
+############################################################
+#                                                          #
+#                      DDOS ATTACKER                       #
+#                                                          #
+############################################################
+
+Welcome to DDOS ATTACKER - your comprehensive platform for exploring and understanding Distributed Denial of Service (DDoS) attacks!
+
+## Introduction
+
+DDOS ATTACKER offers an environment for simulating and analyzing the impacts of DDoS attacks. Whether you're a cybersecurity enthusiast, a network security professional, or an IT student, this tool empowers you to delve into the intricate dynamics of DDoS attacks in a safe and controlled setting.
+
+**Please Note:** DDOS ATTACKER is intended for educational and research purposes only. Under no circumstances should this tool be used to launch attacks against systems or networks. Use of this tool to attack other servers or networks may result in severe legal consequences.
+
+############################################################
+#                     Features                               #
+############################################################
+
+- **User Authentication**: Enable users to register, log in, and manage their profiles securely.
+- **Profile Management**: Users can update their profiles, including adding a bio and profile picture.
+- **DDoS Attack Simulation**: Provides a simulation environment for testing DDoS attack scenarios.
+- **Real-time Communication**: Utilizes WebSocket integration for real-time messaging between clients and the server.
+- **MongoDB Integration**: Implements MongoDB as the database solution for flexibility and scalability.
+
+############################################################
+#                      Installation                         #
+############################################################
+
+1. Clone the repository:
+`/git clone https://github.com/KristinaRiabova/ddos_attack_app-chat.git/`
 
 
-## All links:
+2. Install dependencies:
+`/pip install -r requirements.txt/`
 
 
-
-http://localhost:8000/ddos/
-
-http://localhost:8000/registration/
-
-http://localhost:8000/login/
-
-http://localhost:8000/
-
-http://localhost:8000/profile/
-
-http://localhost:8000/profile/update/
-
-http://localhost:8000/profile/delete/
+4. Run migrations:
+`/python manage.py migrate/`
 
 
-## This guide aims to help future developers understand the implemented features in the provided code.
-
-WebSocket Integration:
-Enables real-time communication between clients and the server.
-Implemented using Django Channels library.
-Facilitates instant message delivery without requiring page reloads.
-
-Template Customization:
-Enhances user experience through visually appealing and user-friendly interfaces.
-Forms for user authentication, registration, and other functionalities.
-Applies styling and responsive design principles for consistency across devices.
-
-The ChatConsumer class is the WebSocket consumer handling connections, message reception, and broadcasting.
-It inherits from AsyncWebsocketConsumer provided by Django Channels.
-connect() method accepts WebSocket connections.
-receive() method handles incoming messages and broadcasts them to other connected clients.
-
-URL patterns are defined to route WebSocket connections to the ChatConsumer.
-WebSocket connections are routed through the AuthMiddlewareStack for authentication.
-Configuration is done in the ProtocolTypeRouter within the routing.py file.
-
-JavaScript WebSocket client establishes a connection with the server.
-Functions handle sending and receiving messages.
-Event listeners manage user interactions such as message submission.
-Auto-responses and notifications are implemented for user engagement.
+6. Start the development server:
+`/python manage.py runserver/`
 
 
-## Database Integration Documentation
+############################################################
+#                          Usage                            #
+############################################################
+
+1. Open [http://localhost:8000/](http://localhost:8000/) in your web browser.
+2. Follow the instructions to register or log in.
+3. Explore the different features such as profile management and launching DDoS attacks.
+
+############################################################
+#                        Endpoints                          #
+############################################################
+
+- **Registration**: `/registration/` (POST)
+- **Login**: `/login/` (POST)
+- **Profile Creation**: `/profile_created/` (GET)
+- **Profile Update**: `/update_profile/` (POST)
+- **Profile Deletion**: `/delete_profile/` (POST)
+- **DDoS Attack**: `/ddos/` (GET)
+
+############################################################
+#                      Documentation                        #
+############################################################
+
+### Logging
+Utilizes Python logging for comprehensive event tracking and error reporting.
+
+### User Authentication and Registration
+- **Login View (login_view):** Validates user credentials against MongoDB and Django authentication systems.
+- **Registration View (registration_view):** Enables users to create accounts with unique profiles.
+
+### Profile Management
+- **Profile Creation View (profile_created_view):** Displays user profiles post-login.
+- **Profile Update View (update_profile):** Allows users to modify their profile details.
+- **Profile Deletion View (delete_profile):** Facilitates the removal of user profiles.
+
+### DDoS Attack Simulation
+- **DDoS View (ddos):** Simulates DDoS attacks with threading for multiple HTTP requests.
+
+### Error Handling
+Robust error handling mechanisms ensure smooth operation and recovery from unforeseen scenarios.
+
+### Caching
+Django's caching mechanism enhances performance by storing responses from external HTTP requests.
+
+Experience the world of DDoS attacks responsibly with DDOS ATTACKER!
+
+
+WebSocket Integration: Enables real-time communication between clients and the server. Implemented using Django Channels library. Facilitates instant message delivery without requiring page reloads.
+Template Customization: Enhances user experience through visually appealing and user-friendly interfaces. Forms for user authentication, registration, and other functionalities. Applies styling and responsive design principles for consistency across devices.
+
+The ChatConsumer class is the WebSocket consumer handling connections, message reception, and broadcasting. It inherits from AsyncWebsocketConsumer provided by Django Channels. connect() method accepts WebSocket connections. receive() method handles incoming messages and broadcasts them to other connected clients.
+URL patterns are defined to route WebSocket connections to the ChatConsumer. WebSocket connections are routed through the AuthMiddlewareStack for authentication. Configuration is done in the ProtocolTypeRouter within the routing.py file.
+
+JavaScript WebSocket client establishes a connection with the server. Functions handle sending and receiving messages. Event listeners manage user interactions such as message submission. Auto-responses and notifications are implemented for user engagement.
+
+# Database Integration Documentation
 
 For this project, MongoDB was chosen as the database solution due to several reasons:
 
 Flexibility: MongoDB is a NoSQL database, offering a flexible schema design that allows for easy adaptation to changing data requirements.
 
 Ease of Use: MongoDB's query language is intuitive and easy to understand, simplifying database operations and development tasks.
+
 
 ## Entity Models:
 
@@ -70,7 +121,7 @@ Profile Model:
 Represents additional profile information associated with each user, such as a bio field.
 
 
-# API Endpoints:
+# More information about API Endpoints:
 
 ## Registration Endpoint:
 
@@ -106,9 +157,9 @@ URL: /update_profile/
 
 Method: POST
 
-Parameters: bio
+Parameters: bio,profile picture
 
-Functionality: Updates the bio information of the user's profile.
+Functionality: Updates the bio information of the user's profile and picture of the profile.
 
 ## Profile Deletion Endpoint:
 
@@ -126,32 +177,15 @@ Method: GET
 
 Functionality: Renders a page for launching DDoS attacks (for testing purposes).
 
-## Error Handling:
-
-The code implements error handling mechanisms to gracefully manage unexpected situations and prevent application crashes.
-Error handling techniques such as try-except blocks, conditional checks, and status code validations are employed.
-HTTP status codes and descriptive error messages are returned to the client to communicate the nature of encountered errors.
 
 
-Login Template (login.html):
 
-Presents a form for user login with fields for username and password.
-
-Registration Template (registration.html):
-
-Provides a form for user registration with fields for username, email, age, and password.
-Implements client-side validation for password requirements using JavaScript.
-
-Index Template (index.html):
-
-Represents the main landing page.
-Contains basic layout and minimal styling for simplicity.
-
-DDOS Attack Template (ddos.html):
-
-Offers a form for launching a DDOS attack.
-Includes fields for target, port, and duration of the attack.
+# Experience the world of DDoS attacks responsibly with DDOS ATTACKER!
 
 CASE DIAGRAM(UML)
-<img width="261" alt="image" src="https://github.com/KristinaRiabova/ddos_attack_app-chat/assets/103763577/f3db273d-f5e6-4bc1-acc5-065509f490ea">
 
+
+
+
+
+<img width="261" alt="image" src="https://github.com/KristinaRiabova/ddos_attack_app-chat/assets/103763577/f3db273d-f5e6-4bc1-acc5-065509f490ea">

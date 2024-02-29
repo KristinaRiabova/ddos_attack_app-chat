@@ -17,6 +17,9 @@ from django.core.cache import cache
 from django.contrib.auth import authenticate, login as django_login
 from django.contrib import messages
 import logging
+from django.http import HttpResponseNotFound
+from django.views.decorators.cache import cache_page
+
 
 logging.basicConfig(level=logging.DEBUG)
 logger = logging.getLogger(__name__)
@@ -44,6 +47,10 @@ def login_view(request):
             user = authenticate(username=username, password=password)
             if user is not None:
                 login(request, user)
+
+                
+                request.session['user_id'] = user.id
+
                 logger.info(f"User {username} logged in.")
                 return redirect('profile_created') 
             else:
@@ -52,6 +59,8 @@ def login_view(request):
             error_message = 'User does not exist'
 
     return render(request, 'login.html', {'error_message': error_message})
+
+
 
 def registration_view(request):
     logger.info("Registration view accessed.")
@@ -86,13 +95,27 @@ def registration_view(request):
     else:
         return render(request, 'registration.html')
 
+
 @login_required
+@cache_page(60 * 15) 
 def profile_created_view(request):
     logger.info("Profile created view accessed.")
-    profile = request.user.profile
+    user_id = request.session.get('user_id')
+    user = get_object_or_404(User, pk=user_id)
+    
+
+    client = MongoClient('mongodb+srv://kriabova:Kris0192@authorization.iobm8pl.mongodb.net/?retryWrites=true&w=majority&appName=Authorization')
+    db = client['Authoriz']
+    collection = db['user']
+    profile_data = collection.find_one({'user_id': user_id})
+
+
+    if profile_data is None:
+        return HttpResponseNotFound("Profile not found")  
     context = {
-        'username': request.user.username,
-        'email': request.user.email,
+        'username': user.username,
+        'email': user.email,
+ 
     }
     return render(request, 'profile_created.html', context)
 
@@ -101,16 +124,15 @@ def read_profile(request):
     logger.info("Read profile view accessed.")
     try:
         profile = request.user.profile
+        context = {
+            'username': request.user.username,
+            'email': request.user.email,
+            'bio': profile.bio
+        }
+        return render(request, 'profile_created.html', context)
     except Profile.DoesNotExist:
         logger.error("Profile does not exist.")
         raise Http404("Profile does not exist")
-
-    context = {
-        'username': request.user.username,
-        'email': request.user.email,
-        'bio': profile.bio
-    }
-    return render(request, 'profile_created.html', context)
 
 @login_required
 def update_profile(request):
@@ -134,12 +156,22 @@ def delete_profile(request):
         return redirect('profile_view')
 
     if request.method == 'POST':
+        
         profile.delete()
+        
+       
+        client = MongoClient('mongodb+srv://kriabova:Kris0192@authorization.iobm8pl.mongodb.net/?retryWrites=true&w=majority&appName=Authorization')
+        db = client['Authoriz']
+        collection = db['user']
+        collection.delete_one({'username': request.user.username})
+
         messages.success(request, "Profile deleted successfully.")
         return redirect('registration')  
     else:
         return render(request, 'profile_delete.html')
 
+
+@login_required
 def ddos(request):
     logger.info("DDoS view accessed.")
     return render(request, 'ddos.html')
@@ -157,6 +189,8 @@ def send_get_requests(url):
         return f"Response from {url}: {response.status_code}"
     except Exception as e:
         return f"Error accessing {url}: {str(e)}"
+    
+
 @csrf_exempt
 def launch_attack(request):
     logger.info("Launch attack view accessed.")

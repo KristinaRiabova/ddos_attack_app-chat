@@ -16,6 +16,7 @@
     <i class="fas fa-user-secret hacker-icon"></i>
 
     <div class="profile-container">
+      {% if username %}
       <h1>Welcome, {{ username }}!</h1>
       <p>Profile picture:</p>
       <img src="{{ user.profile.profile_picture.url }}" alt="Profile Picture"  />
@@ -30,6 +31,9 @@
       <div class="show-menu" onclick="toggleMenu()">
         <i class="fas fa-bars"></i>
       </div>
+      {% else %}
+      <p>No profile found for this user.</p>
+      {% endif %}
     </div>
     <script src="{% static 'js/profile_created.js' %}"></script>
     

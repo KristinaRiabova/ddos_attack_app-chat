@@ -27,6 +27,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'chatapp',
     'rest_framework',
+    'corsheaders',
+    
     
 ]
 
@@ -48,7 +50,16 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware'
+    'django.middleware.csrf.CsrfViewMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
+]
+
+
+CORS_ALLOWED_ORIGINS = [
+ "http://localhost:8000"
+ "http://127.0.0.1:8000"
+
 ]
 
 ROOT_URLCONF = 'wechatpp.urls'
@@ -134,9 +145,27 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 CACHES = {
     'default': {
         'BACKEND': 'django_redis.cache.RedisCache',
-        'LOCATION': 'redis://localhost:6379/1',  # Адрес вашего Redis-сервера
+        'LOCATION': 'redis://localhost:6379/1', 
         'OPTIONS': {
             'CLIENT_CLASS': 'django_redis.client.DefaultClient',
         }
     }
+}
+
+SESSION_ENGINE = 'django.contrib.sessions.backends.db'
+
+
+
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "handlers": {
+        "console": {
+            "class": "logging.StreamHandler",
+        },
+    },
+    "root": {
+        "handlers": ["console"],
+        "level": "WARNING",
+    },
 }

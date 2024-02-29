@@ -23,27 +23,19 @@ Welcome to DDOS ATTACKER!
 ############################################################
 
 1. Clone the repository:
-git clone https://github.com/your_username/project_name.git
+`/git clone https://github.com/KristinaRiabova/ddos_attack_app-chat.git/`
 
-markdown
-Copy code
 
 2. Install dependencies:
-pip install -r requirements.txt
-
-markdown
-Copy code
-
-3. Configure MongoDB:
+`/pip install -r requirements.txt/`
 
 
 4. Run migrations:
-python manage.py migrate
+`/python manage.py migrate/`
 
 
-5. Start the development server:
-python manage.py runserver
-
+6. Start the development server:
+`/python manage.py runserver/`
 
 
 ############################################################
@@ -63,7 +55,7 @@ python manage.py runserver
 - **Profile Creation**: `/profile_created/` (GET)
 - **Profile Update**: `/update_profile/` (POST)
 - **Profile Deletion**: `/delete_profile/` (POST)
-- **DDoS Attack Simulation**: `/ddos/` (GET)
+- **DDoS Attack**: `/ddos/` (GET)
 
 ############################################################
 #                      Documentation                        #

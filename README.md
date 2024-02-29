@@ -1,12 +1,20 @@
+![banner](https://zn.ua/img/article/4846/30_main.jpeg)
+
+
+
 ############################################################
 #                                                          #
 #                      DDOS ATTACKER                       #
 #                                                          #
 ############################################################
 
-Welcome to DDOS ATTACKER!
+Welcome to DDOS ATTACKER - your comprehensive platform for exploring and understanding Distributed Denial of Service (DDoS) attacks!
 
+## Introduction
 
+DDOS ATTACKER offers an environment for simulating and analyzing the impacts of DDoS attacks. Whether you're a cybersecurity enthusiast, a network security professional, or an IT student, this tool empowers you to delve into the intricate dynamics of DDoS attacks in a safe and controlled setting.
+
+**Please Note:** DDOS ATTACKER is intended for educational and research purposes only. Under no circumstances should this tool be used to launch attacks against systems or networks. Use of this tool to attack other servers or networks may result in severe legal consequences.
 
 ############################################################
 #                     Features                               #
@@ -61,35 +69,105 @@ Welcome to DDOS ATTACKER!
 #                      Documentation                        #
 ############################################################
 
-## 1. Logging
+### Logging
+Utilizes Python logging for comprehensive event tracking and error reporting.
 
-The project utilizes the Python logging module for logging events and errors. It's configured to output log messages with a level of DEBUG. Log messages are generated throughout the code to track events such as page accesses, user logins, and errors.
+### User Authentication and Registration
+- **Login View (login_view):** Validates user credentials against MongoDB and Django authentication systems.
+- **Registration View (registration_view):** Enables users to create accounts with unique profiles.
 
-## 2. User Authentication and Registration
+### Profile Management
+- **Profile Creation View (profile_created_view):** Displays user profiles post-login.
+- **Profile Update View (update_profile):** Allows users to modify their profile details.
+- **Profile Deletion View (delete_profile):** Facilitates the removal of user profiles.
 
-Login View (login_view): Handles user login by authenticating against MongoDB and Django's authentication system.
-Registration View (registration_view): Allows users to register by creating a new user profile in MongoDB and Django.
+### DDoS Attack Simulation
+- **DDoS View (ddos):** Simulates DDoS attacks with threading for multiple HTTP requests.
 
-## 3. Profile Management
+### Error Handling
+Robust error handling mechanisms ensure smooth operation and recovery from unforeseen scenarios.
 
-Profile Creation View (profile_created_view): Displays the user's profile information after successful login.
-Profile Update View (update_profile): Allows users to update their profile information, including the bio and profile picture.
-Profile Deletion View (delete_profile): Enables users to delete their profiles from the system.
+### Caching
+Django's caching mechanism enhances performance by storing responses from external HTTP requests.
 
-## 4. DDoS Attack Simulation
+Experience the world of DDoS attacks responsibly with DDOS ATTACKER!
 
-DDoS View (ddos): Renders a page for launching DDoS attacks. It utilizes threading to send multiple HTTP requests to the specified target URL simultaneously.
 
-## 5. Error Handling
+WebSocket Integration: Enables real-time communication between clients and the server. Implemented using Django Channels library. Facilitates instant message delivery without requiring page reloads.
+Template Customization: Enhances user experience through visually appealing and user-friendly interfaces. Forms for user authentication, registration, and other functionalities. Applies styling and responsive design principles for consistency across devices.
 
-The code includes error handling mechanisms to gracefully manage unexpected situations and prevent application crashes. Error messages and status codes are returned to the client to communicate the nature of encountered errors.
+The ChatConsumer class is the WebSocket consumer handling connections, message reception, and broadcasting. It inherits from AsyncWebsocketConsumer provided by Django Channels. connect() method accepts WebSocket connections. receive() method handles incoming messages and broadcasts them to other connected clients.
+URL patterns are defined to route WebSocket connections to the ChatConsumer. WebSocket connections are routed through the AuthMiddlewareStack for authentication. Configuration is done in the ProtocolTypeRouter within the routing.py file.
 
-## 6. Caching
+JavaScript WebSocket client establishes a connection with the server. Functions handle sending and receiving messages. Event listeners manage user interactions such as message submission. Auto-responses and notifications are implemented for user engagement.
 
-Cache Usage: The project employs Django's caching mechanism (django.core.cache) to cache responses from external HTTP requests. Cached responses are stored for a specified duration to optimize performance and reduce the load on external services.
+# Database Integration Documentation
 
+For this project, MongoDB was chosen as the database solution due to several reasons:
+Flexibility: MongoDB is a NoSQL database, offering a flexible schema design that allows for easy adaptation to changing data requirements.
+
+Ease of Use: MongoDB's query language is intuitive and easy to understand, simplifying database operations and development tasks.
+
+
+## Entity Models:
+
+UserProfile Model:
+Stores user information such as username, email, and password.
+
+Profile Model:
+Represents additional profile information associated with each user, such as a bio field.
+
+
+# More information about API Endpoints:
+
+## Registration Endpoint:
+
+URL: /registration/
+Method: POST
+Parameters: username, email, password
+Functionality: Creates a new user profile and saves it to the database.
+
+## Login Endpoint:
+
+URL: /login/
+Method: POST
+Parameters: username, password
+Functionality: Authenticates the user and logs them into the system.
+
+## Profile Creation Endpoint(after registration):
+
+URL: /profile_created/
+Method: GET
+Functionality: Retrieves the user profile information after successful login.
+
+## Profile Update Endpoint(update your bio):
+
+URL: /update_profile/
+Method: POST
+Parameters: bio,profile picture
+Functionality: Updates the bio information of the user's profile and picture of the profile.
+
+## Profile Deletion Endpoint:
+
+URL: /delete_profile/
+Method: POST
+Functionality: Deletes the user's profile from the system.
+
+##DDoS Endpoint:
+
+URL: /ddos/
+Method: GET
+Functionality: Renders a page for launching DDoS attacks (for testing purposes).
 
 
 CASE DIAGRAM(UML)
-<img width="261" alt="image" src="https://github.com/KristinaRiabova/ddos_attack_app-chat/assets/103763577/f3db273d-f5e6-4bc1-acc5-065509f490ea">
 
+# Experience the world of DDoS attacks responsibly with DDOS ATTACKER!
+
+
+
+
+
+
+
+<img width="261" alt="image" src="https://github.com/KristinaRiabova/ddos_attack_app-chat/assets/103763577/f3db273d-f5e6-4bc1-acc5-065509f490ea">

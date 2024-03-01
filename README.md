@@ -12,7 +12,7 @@ Welcome to DDOS ATTACKER - your comprehensive platform for exploring and underst
 
 ## Introduction
 
-DDOS ATTACKER offers an environment for simulating and analyzing the impacts of DDoS attacks. Whether you're a cybersecurity enthusiast, a network security professional, or an IT student, this tool empowers you to delve into the intricate dynamics of DDoS attacks in a safe and controlled setting.
+DDOS ATTACKER offers an environment for DDoS attacks. Whether you're a cybersecurity enthusiast, a network security professional, or an IT student, this tool empowers you to delve into the intricate dynamics of DDoS attacks in a safe and controlled setting.
 
 **Please Note:** DDOS ATTACKER is intended for educational and research purposes only. Under no circumstances should this tool be used to launch attacks against systems or networks. Use of this tool to attack other servers or networks may result in severe legal consequences.
 

@@ -14,7 +14,7 @@ import requests
 import threading
 import logging
 import sys
-
+import time
 
 
 #LOGGING
@@ -223,6 +223,10 @@ def send_get_requests(url):
 @csrf_exempt
 def launch_attack(request):
     logger.info("Launch attack view accessed.")
+    
+
+    start_time = time.time()
+
     if request.method == 'POST':
         url = request.POST.get('target')
         num_requests = request.POST.get('requests')
@@ -253,10 +257,15 @@ def launch_attack(request):
             thread.join()
 
         logger.info("Attack launched successfully.")
+        
+
+        end_time = time.time()
+        
+        total_time = end_time - start_time
+        logger.info(f"Total time taken for processing: {total_time} seconds.")
+        
         return JsonResponse({'message': 'Attack launched successfully.'}, status=200)
 
     else:
         logger.error("Only POST requests are allowed.")
         return JsonResponse({'error': 'Only POST requests are allowed.'}, status=405)
-    
-    

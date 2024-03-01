@@ -1,0 +1,37 @@
+2024-03-01 17:13:43,277 - django.utils.autoreload - INFO - Watching for file changes with StatReloader
+2024-03-01 17:13:43,405 - daphne.server - INFO - HTTP/2 support not enabled (install the http2 and tls Twisted extras)
+2024-03-01 17:13:43,405 - daphne.server - INFO - Configuring endpoint tcp:port=8000:interface=127.0.0.1
+2024-03-01 17:13:43,406 - daphne.server - INFO - Listening on TCP address 127.0.0.1:8000
+2024-03-01 17:13:51,734 - chatapp.middleware - INFO - Incoming request: GET /profile_created/
+2024-03-01 17:13:51,763 - chatapp.views - INFO - Profile created view accessed.
+2024-03-01 17:13:51,779 - chatapp.middleware - INFO - Outgoing response: 200
+2024-03-01 17:13:51,780 - django.channels.server - INFO - [mHTTP GET /profile_created/ 200 [0.05, 127.0.0.1:53260][0m
+2024-03-01 17:14:02,275 - chatapp.middleware - INFO - Incoming request: GET /profile/update/
+2024-03-01 17:14:02,291 - chatapp.views - INFO - Update profile view accessed.
+2024-03-01 17:14:02,304 - chatapp.middleware - INFO - Outgoing response: 200
+2024-03-01 17:14:02,305 - django.channels.server - INFO - [mHTTP GET /profile/update/ 200 [0.03, 127.0.0.1:53260][0m
+2024-03-01 17:14:02,320 - django.channels.server - INFO - [36mHTTP GET /static/css/profile_update.css 304 [0.00, 127.0.0.1:53260][0m
+2024-03-01 17:14:06,673 - chatapp.middleware - INFO - Incoming request: POST /profile/update/
+2024-03-01 17:14:06,700 - chatapp.views - INFO - Update profile view accessed.
+2024-03-01 17:14:07,475 - chatapp.views - INFO - Bio updated successfully in MongoDB.
+2024-03-01 17:14:07,477 - chatapp.middleware - INFO - Outgoing response: 302
+2024-03-01 17:14:07,477 - django.channels.server - INFO - [32mHTTP POST /profile/update/ 302 [0.81, 127.0.0.1:53260][0m
+2024-03-01 17:14:07,481 - chatapp.middleware - INFO - Incoming request: GET /profile/
+2024-03-01 17:14:07,707 - chatapp.views - INFO - Read profile view accessed.
+2024-03-01 17:14:07,715 - chatapp.middleware - INFO - Outgoing response: 200
+2024-03-01 17:14:07,716 - django.channels.server - INFO - [mHTTP GET /profile/ 200 [0.23, 127.0.0.1:53260][0m
+2024-03-01 17:14:23,503 - chatapp.middleware - INFO - Incoming request: GET /accounts/logout/
+2024-03-01 17:14:23,539 - chatapp.middleware - INFO - Outgoing response: 302
+2024-03-01 17:14:23,541 - django.channels.server - INFO - [32mHTTP GET /accounts/logout/ 302 [0.04, 127.0.0.1:53260][0m
+2024-03-01 17:14:23,545 - chatapp.middleware - INFO - Incoming request: GET /accounts/login/
+2024-03-01 17:14:23,554 - chatapp.middleware - INFO - Outgoing response: 200
+2024-03-01 17:14:23,555 - django.channels.server - INFO - [mHTTP GET /accounts/login/ 200 [0.01, 127.0.0.1:53260][0m
+2024-03-01 17:14:23,579 - django.channels.server - INFO - [mHTTP GET /static/css/login.css 200 [0.01, 127.0.0.1:53260][0m
+2024-03-01 17:15:00,071 - chatapp.middleware - INFO - Incoming request: POST /login/
+2024-03-01 17:15:00,840 - chatapp.views - INFO - User Jc123d logged in.
+2024-03-01 17:15:00,844 - chatapp.middleware - INFO - Outgoing response: 302
+2024-03-01 17:15:00,845 - django.channels.server - INFO - [32mHTTP POST /login/ 302 [0.78, 127.0.0.1:53260][0m
+2024-03-01 17:15:00,848 - chatapp.middleware - INFO - Incoming request: GET /profile_created/
+2024-03-01 17:15:01,224 - chatapp.views - INFO - Profile created view accessed.
+2024-03-01 17:15:01,231 - chatapp.middleware - INFO - Outgoing response: 200
+2024-03-01 17:15:01,232 - django.channels.server - INFO - [mHTTP GET /profile_created/ 200 [0.38, 127.0.0.1:53260][0m

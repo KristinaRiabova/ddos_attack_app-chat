@@ -258,4 +258,8 @@ def launch_attack(request):
     else:
         logger.error("Only POST requests are allowed.")
         return JsonResponse({'error': 'Only POST requests are allowed.'}, status=405)
+<<<<<<< HEAD
     
+=======
+    
+>>>>>>> 2c09f6f (fixing logging)

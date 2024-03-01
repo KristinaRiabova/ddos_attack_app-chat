@@ -43,6 +43,7 @@ CHANNEL_LAYERS = {
 LOGIN_REDIRECT_URL = 'profile_created'  
 LOGIN_URL = 'login'  
 MIDDLEWARE = [
+    'chatapp.middleware.LoggingMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'corsheaders.middleware.CorsMiddleware',
@@ -160,15 +161,26 @@ LOGGING = {
     'disable_existing_loggers': False,
     'handlers': {
         'console': {
-            'level': 'DEBUG',
+            'level': 'INFO',
             'class': 'logging.StreamHandler',
+        },
+        'file': {
+            'level': 'INFO',
+            'class': 'logging.FileHandler',
+            'filename': '/Users/kristina_mbp/ddos_attack_app-chat/chatapp/logfile.log', 
+            'formatter': 'verbose',
         },
     },
     'loggers': {
         '': {
-            'handlers': ['console'],
-            'level': 'DEBUG',
+            'handlers': ['console', 'file'],  
+            'level': 'INFO',
             'propagate': True,
+        },
+    },
+    'formatters': {
+        'verbose': {
+            'format': '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
         },
     },
 }

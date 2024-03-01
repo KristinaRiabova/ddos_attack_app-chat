@@ -45,9 +45,9 @@ def login_view(request):
         password = request.POST.get('password')
 
 
-        client = MongoClient('mongodb+srv://kriabova:Kris0192@authorization.iobm8pl.mongodb.net/?retryWrites=true&w=majority&appName=Authorization')
-        db = client['Authoriz']
-        collection = db['user']
+        client = MongoClient('mongodb+srv://kristinaer304:Kris0192@cluster0.vuekyu7.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0')
+        db = client['Author']
+        collection = db['users']
 
         user_document = collection.find_one({'username': username, 'password': password})
 
@@ -77,14 +77,11 @@ def registration_view(request):
         email = request.POST.get('email')
         password = request.POST.get('password')
 
-        client = MongoClient('mongodb+srv://kriabova:Kris0192@authorization.iobm8pl.mongodb.net/?retryWrites=true&w=majority&appName=Authorization')
-        db = client['Authoriz']
-        collection = db['user']
+        client = MongoClient('mongodb+srv://kristinaer304:Kris0192@cluster0.vuekyu7.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0')
+        db = client['Author']
+        collection = db['users']
 
-        existing_user = collection.find_one({'$or': [{'username': username}, {'email': email}]})
-        if existing_user:
-            return render(request, 'registration.html', {'error_message': 'Username or email already exists'})
-        else:
+        if collection.find_one({'username': username}) is None and collection.find_one({'email': email}) is None:
             user_data = {
                 'username': username,
                 'email': email,
@@ -95,11 +92,14 @@ def registration_view(request):
             user = User.objects.create_user(username=username, email=email, password=password)
             profile = Profile(user=user)
             profile.save()
+
             user = authenticate(username=username, password=password)
             if user is not None:
                 login(request, user)
                 logger.info(f"User {username} registered and logged in.")
                 return redirect('profile_created')
+        else:
+            return render(request, 'registration.html', {'error_message': 'Username or email already exists'})
     else:
         return render(request, 'registration.html')
 
@@ -114,14 +114,18 @@ def logout(request):
 @login_required
 def profile_created_view(request):
     logger.info("Profile created view accessed.")
-    profile = request.user.profile
-    
-    context = {
+    try:
+        profile = request.user.profile
+        context = {
+            'username': request.user.username,
+            'email': request.user.email,
+            'bio': profile.bio  
+        }
+        return render(request, 'profile_created.html', context)
+    except Profile.DoesNotExist:
+        logger.error("Profile does not exist.")
+        raise Http404("Profile does not exist")
 
-        'username': request.user.username,
-        'email': request.user.email,
-    }
-    return render(request, 'profile_created.html', context)
 
 
 @login_required
@@ -147,11 +151,27 @@ def update_profile(request):
         form = ProfileUpdateForm(request.POST, request.FILES, instance=request.user.profile)
         if form.is_valid():
             form.save()
+            
+ 
+            bio = form.cleaned_data['bio'] 
+            try:
+                profile = request.user.profile  
+                profile.bio = bio 
+                profile.save() 
+               
+                client = MongoClient('mongodb+srv://kristinaer304:Kris0192@cluster0.vuekyu7.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0')
+                db = client['Author']
+                collection = db['users']
+                collection.update_one({'username': request.user.username}, {'$set': {'bio': bio}})
+                logger.info("Bio updated successfully in MongoDB.")
+            except Profile.DoesNotExist:
+                logger.error("Profile does not exist.")
 
             return redirect('read_profile')
     else:
         form = ProfileUpdateForm(instance=request.user.profile)
     return render(request, 'profile_update.html', {'form': form})
+
 
 
 @login_required
@@ -167,9 +187,9 @@ def delete_profile(request):
 
         cache.delete(f"profile_{request.user.username}")
 
-        client = MongoClient('mongodb+srv://kriabova:Kris0192@authorization.iobm8pl.mongodb.net/?retryWrites=true&w=majority&appName=Authorization')
-        db = client['Authoriz']
-        collection = db['user']
+        client = MongoClient('mongodb+srv://kristinaer304:Kris0192@cluster0.vuekyu7.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0')
+        db = client['Author']
+        collection = db['users']
         collection.delete_one({'username': request.user.username})
 
         messages.success(request, "Profile deleted successfully.")

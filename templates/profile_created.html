@@ -1,42 +1,42 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Profile Created</title>
 
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
-    />
-    <link rel="stylesheet" href="{% static 'css/profile_created.css' %}" />
-  </head>
-  <body>
-    <i class="fas fa-user-secret hacker-icon"></i>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profile Created</title>
 
-    <div class="profile-container">
-      {% if username %}
-      <h1>Welcome, {{ username }}!</h1>
-      <p>Profile picture:</p>
-      <img src="{{ user.profile.profile_picture.url }}" alt="Profile Picture"  />
-      <p>Your email: {{ email }}</p>
-      <p>Your bio: {{ bio }}</p>
-      
-      <div class="menu" id="profile-menu">
-        <a href="{% url 'update_profile' %}">Update Profile</a>
-        <a href="{% url 'delete_profile' %}">Delete Profile</a>
-        <a href="{% url 'ddos' %}">DDoS Attack Page</a>
-        <a href="{% url 'logout' %}">Logout</a> 
-      </div>
-      <div class="show-menu" onclick="toggleMenu()">
-        <i class="fas fa-bars"></i>
-      </div>
-      {% else %}
-      <p>No profile found for this user.</p>
-      {% endif %}
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+  <link rel="stylesheet" href="{% static 'css/profile_created.css' %}" />
+</head>
+
+<body>
+  <i class="fas fa-user-secret hacker-icon"></i>
+
+  <div class="profile-container">
+    {% if username %}
+    <h1>Welcome, {{ username }}!</h1>
+    <p>Profile picture:</p>
+    <img src="{{ user.profile.profile_picture.url }}" alt="Profile Picture" />
+    <p>Your email: {{ email }}</p>
+    <p>Your bio: {{ bio }}</p>
+
+    <div class="menu" id="profile-menu">
+      <a href="{% url 'update_profile' %}">Update Profile</a>
+      <a href="{% url 'delete_profile' %}">Delete Profile</a>
+      <a href="{% url 'ddos' %}">DDoS Attack Page</a>
+      <a href="{% url 'logout' %}">Logout</a>
     </div>
-    <script src="{% static 'js/profile_created.js' %}"></script>
-    
-  </body>
+    <div class="show-menu" onclick="toggleMenu()">
+      <i class="fas fa-bars"></i>
+    </div>
+    {% else %}
+    <p>No profile found for this user.</p>
+    {% endif %}
+  </div>
+  <script src="{% static 'js/profile_created.js' %}"></script>
+
+</body>
+
 </html>

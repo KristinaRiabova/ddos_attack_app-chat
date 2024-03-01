@@ -35,3 +35,42 @@
 2024-03-01 17:15:01,224 - chatapp.views - INFO - Profile created view accessed.
 2024-03-01 17:15:01,231 - chatapp.middleware - INFO - Outgoing response: 200
 2024-03-01 17:15:01,232 - django.channels.server - INFO - [mHTTP GET /profile_created/ 200 [0.38, 127.0.0.1:53260][0m
+2024-03-01 17:41:51,035 - daphne.server - INFO - HTTP/2 support not enabled (install the http2 and tls Twisted extras)
+2024-03-01 17:41:51,035 - daphne.server - INFO - Configuring endpoint tcp:port=8000:interface=127.0.0.1
+2024-03-01 17:41:51,036 - daphne.server - INFO - Listening on TCP address 127.0.0.1:8000
+2024-03-01 17:41:58,548 - chatapp.middleware - INFO - Incoming request: GET /profile_created/
+2024-03-01 17:41:58,574 - chatapp.views - INFO - Profile created view accessed.
+2024-03-01 17:41:58,591 - chatapp.middleware - INFO - Outgoing response: 200
+2024-03-01 17:42:07,095 - chatapp.middleware - INFO - Incoming request: GET /profile_created/
+2024-03-01 17:42:07,121 - chatapp.views - INFO - Profile created view accessed.
+2024-03-01 17:42:07,130 - chatapp.middleware - INFO - Outgoing response: 200
+2024-03-01 17:42:07,519 - chatapp.middleware - INFO - Incoming request: GET /profile_created/
+2024-03-01 17:42:07,628 - chatapp.views - INFO - Profile created view accessed.
+2024-03-01 17:42:07,640 - chatapp.middleware - INFO - Outgoing response: 200
+2024-03-01 17:42:08,666 - chatapp.middleware - INFO - Incoming request: GET /profile_created/
+2024-03-01 17:42:08,690 - chatapp.views - INFO - Profile created view accessed.
+2024-03-01 17:42:08,699 - chatapp.middleware - INFO - Outgoing response: 200
+2024-03-01 17:42:09,019 - chatapp.middleware - INFO - Incoming request: GET /profile_created/
+2024-03-01 17:42:09,199 - chatapp.views - INFO - Profile created view accessed.
+2024-03-01 17:42:09,210 - chatapp.middleware - INFO - Outgoing response: 200
+2024-03-01 17:42:09,331 - chatapp.middleware - INFO - Incoming request: GET /profile_created/
+2024-03-01 17:42:09,697 - chatapp.views - INFO - Profile created view accessed.
+2024-03-01 17:42:09,704 - chatapp.middleware - INFO - Outgoing response: 200
+2024-03-01 17:42:12,915 - chatapp.middleware - INFO - Incoming request: GET /profile/delete/
+2024-03-01 17:42:12,947 - chatapp.views - INFO - Delete profile view accessed.
+2024-03-01 17:42:12,958 - chatapp.middleware - INFO - Outgoing response: 200
+2024-03-01 17:42:14,163 - chatapp.middleware - INFO - Incoming request: POST /profile/delete/
+2024-03-01 17:42:14,184 - chatapp.views - INFO - Delete profile view accessed.
+2024-03-01 17:42:14,925 - chatapp.middleware - INFO - Outgoing response: 302
+2024-03-01 17:42:14,930 - chatapp.middleware - INFO - Incoming request: GET /registration/
+2024-03-01 17:42:14,932 - chatapp.views - INFO - Registration view accessed.
+2024-03-01 17:42:14,934 - chatapp.middleware - INFO - Outgoing response: 200
+2024-03-01 17:43:31,843 - daphne.server - INFO - HTTP/2 support not enabled (install the http2 and tls Twisted extras)
+2024-03-01 17:43:31,843 - daphne.server - INFO - Configuring endpoint tcp:port=8000:interface=127.0.0.1
+2024-03-01 17:43:31,843 - daphne.server - INFO - Listening on TCP address 127.0.0.1:8000
+2024-03-01 17:43:35,786 - chatapp.middleware - INFO - Incoming request: GET /registration/
+2024-03-01 17:43:35,793 - chatapp.views - INFO - Registration view accessed.
+2024-03-01 17:43:35,810 - chatapp.middleware - INFO - Outgoing response: 200
+2024-03-01 17:43:36,170 - chatapp.middleware - INFO - Incoming request: GET /registration/
+2024-03-01 17:43:36,172 - chatapp.views - INFO - Registration view accessed.
+2024-03-01 17:43:36,174 - chatapp.middleware - INFO - Outgoing response: 200

@@ -43,6 +43,7 @@ CHANNEL_LAYERS = {
 LOGIN_REDIRECT_URL = 'profile_created'  
 LOGIN_URL = 'login'  
 MIDDLEWARE = [
+    'chatapp.middleware.ErrorHandlingMiddleware',
     'chatapp.middleware.LoggingMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -155,7 +156,6 @@ SESSION_ENGINE = 'django.contrib.sessions.backends.db'
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True  
 
 
-
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
@@ -170,12 +170,23 @@ LOGGING = {
             'filename': '/Users/kristina_mbp/ddos_attack_app-chat/chatapp/logfile.log', 
             'formatter': 'verbose',
         },
+        'error_file': {  
+            'level': 'ERROR',
+            'class': 'logging.FileHandler',
+            'filename': '/Users/kristina_mbp/ddos_attack_app-chat/chatapp/error.log', 
+            'formatter': 'verbose',
+        },
     },
     'loggers': {
         '': {
-            'handlers': ['console', 'file'],  
+            'handlers': ['console', 'file', 'error_file'],  
             'level': 'INFO',
             'propagate': True,
+        },
+        'django': {
+            'handlers': ['error_file'],  
+            'level': 'ERROR',
+            'propagate': False,
         },
     },
     'formatters': {
@@ -184,6 +195,7 @@ LOGGING = {
         },
     },
 }
+
 
 
 
